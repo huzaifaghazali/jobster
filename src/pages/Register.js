@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
@@ -18,6 +19,7 @@ function Register() {
   const [values, setValues] = useState(initialState);
   const { user, isLoading } = useSelector((store) => store.user);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -49,6 +51,14 @@ function Register() {
   const toggleMember = () => {
     setValues({ ...values, isMember: !values.isMember });
   };
+
+  useEffect(() => {
+    if(user) {
+      setTimeout(() => {
+        navigate('/')
+      }, 2000);
+    }
+  }, [user, navigate])
 
   return (
     <Wrapper className='full-page'>
