@@ -4,10 +4,15 @@ import { FaAlignLeft, FaUserCircle, FaCaretDown } from 'react-icons/fa';
 
 import Logo from './Logo';
 import Wrapper from '../assets/wrappers/Navbar';
+import { toggleSidebar } from '../features/user/userSlice';
 
 const Navbar = () => {
   const { user } = useSelector((store) => store.user);
   const dispatch = useDispatch();
+
+  const toggle = () => {
+    dispatch(toggleSidebar());
+  };
 
   return (
     <Wrapper>
@@ -15,7 +20,7 @@ const Navbar = () => {
         <button
           type='button'
           className='toggle-btn'
-          onClick={() => console.log('toggle sidebar')}
+          onClick={toggle}
         >
           <FaAlignLeft />
         </button>
