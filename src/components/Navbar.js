@@ -4,7 +4,7 @@ import { FaAlignLeft, FaUserCircle, FaCaretDown } from 'react-icons/fa';
 
 import Logo from './Logo';
 import Wrapper from '../assets/wrappers/Navbar';
-import { toggleSidebar } from '../features/user/userSlice';
+import { logoutUser, toggleSidebar } from '../features/user/userSlice';
 
 const Navbar = () => {
   const [showLogout, setShowLogout] = useState(false);
@@ -35,11 +35,12 @@ const Navbar = () => {
             {user?.name}
             <FaCaretDown />
           </button>
+          
           <div className={showLogout ? 'dropdown show-dropdown' : 'dropdown'}>
             <button
               type='button'
               className='dropdown-btn'
-              onClick={() => console.log('logout user')}
+              onClick={() => dispatch(logoutUser())}
             >
               logout
             </button>
