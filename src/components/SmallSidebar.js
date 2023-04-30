@@ -6,6 +6,7 @@ import { FaTimes } from 'react-icons/fa';
 import Wrapper from '../assets/wrappers/SmallSideBar';
 import Logo from './Logo';
 import { toggleSidebar } from '../features/user/userSlice';
+import links from '../utils/links';
 
 const SmallSidebar = () => {
   const { isSidebarOpen } = useSelector((store) => store.user);
@@ -29,7 +30,24 @@ const SmallSidebar = () => {
           <header>
             <Logo />
           </header>
-          <div className='nav-links'>nav</div>
+          <div className='nav-links'>
+            {links.map((link) => {
+              const { id, text, path, icon } = link;
+              return (
+                <NavLink
+                  key={id}
+                  to={path}
+                  className={({ isActive }) =>
+                    isActive ? 'nav-link active' : 'nav-link'
+                  }
+                  onClick={toggle}
+                >
+                  <span className='icon'>{icon}</span>
+                  {text}
+                </NavLink>
+              );
+            })}
+          </div>
         </div>
       </div>
     </Wrapper>
