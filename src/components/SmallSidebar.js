@@ -5,21 +5,31 @@ import { FaTimes } from 'react-icons/fa';
 
 import Wrapper from '../assets/wrappers/SmallSideBar';
 import Logo from './Logo';
+import { toggleSidebar } from '../features/user/userSlice';
 
 const SmallSidebar = () => {
+  const { isSidebarOpen } = useSelector((store) => store.user);
+  const dispatch = useDispatch();
+
+  const toggle = () => {
+    dispatch(toggleSidebar());
+  };
+
   return (
     <Wrapper>
-      <div className='sidebar-container show-sidebar'>
+      <div
+        className={
+          isSidebarOpen ? 'sidebar-container show-sidebar' : 'sidebar-container'
+        }
+      >
         <div className='content'>
-          <button className='close-btn'>
+          <button type='button' className='close-btn' onClick={toggle}>
             <FaTimes />
           </button>
           <header>
             <Logo />
           </header>
-          <div className='nav-links'>
-            nav
-          </div>
+          <div className='nav-links'>nav</div>
         </div>
       </div>
     </Wrapper>
