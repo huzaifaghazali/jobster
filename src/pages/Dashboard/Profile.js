@@ -1,8 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+
+import { FormRow } from '../../components';
+import Wrapper from '../../assets/wrappers/DashboardFormPage';
 
 const Profile = () => {
   return (
-    <h1>Profile</h1>
+    <Wrapper>
+      <h1>Profile</h1>
+    </Wrapper>
   )
 }
 
