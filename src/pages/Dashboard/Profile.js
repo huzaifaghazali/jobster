@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 
 import { FormRow } from '../../components';
 import Wrapper from '../../assets/wrappers/DashboardFormPage';
+import { updateUser } from '../../features/user/userSlice';
 
 const Profile = () => {
   const { isLoading, user } = useSelector((store) => store.user);
@@ -16,12 +17,15 @@ const Profile = () => {
   });
 
   const handleSubmit = (event) => {
+    event.preventDefault();
     const { name, email, lastName, location } = userData;
 
     if (!name || !email || !lastName || !location) {
       toast.error('Please Fill Out All Fields');
       return;
     }
+
+    dispatch(updateUser(userData));
   };
 
   const handleChange = (event) => {
