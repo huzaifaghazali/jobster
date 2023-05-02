@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import Wrapper from '../../assets/wrappers/DashboardFormPage';
 import { FormRow } from '../../components';
 import FormRowSelect from '../../components/FormRowSelect';
+import { handleChange } from '../../features/job/jobSlice';
 
 const AddJob = () => {
   const {
@@ -32,7 +33,7 @@ const AddJob = () => {
 
   const handleJobInput = (event) => {
     const { name, value } = event.target;
-    console.log(name, value);
+    dispatch(handleChange({ name, value }));
   };
 
   return (
