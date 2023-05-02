@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
@@ -8,6 +8,7 @@ import FormRowSelect from '../../components/FormRowSelect';
 import { handleChange, clearValues, createJob } from '../../features/job/jobSlice';
 
 const AddJob = () => {
+  const { user } = useSelector((store) => store.user);
   const {
     isLoading,
     position,
@@ -37,6 +38,13 @@ const AddJob = () => {
     const { name, value } = event.target;
     dispatch(handleChange({ name, value }));
   };
+
+  useEffect(() => {
+    // Check for isEditing
+    if(!isEditing) {
+      dispatch(handleChange({name: 'jobLocation', value: user.location}))
+    }
+  }, [])
 
   return (
     <Wrapper>
