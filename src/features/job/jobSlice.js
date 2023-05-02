@@ -16,6 +16,26 @@ const initialState = {
   editJobId: '',
 };
 
+export const createJob = createAsyncThunk(
+  'job/createJob',
+  async (job, thunkAPI) => {
+    try {
+      const resp = await customFetch.post('/jobs', job, {
+        headers: {
+          authorization: `Bearer ${thunkAPI.getState().user.user.token}`,
+        }
+      });
+      thunkAPI.dispatch(clearValues());
+      return resp.data;
+    } catch (error) {
+      if (error.response.status === 401) {
+        thunkAPI.rejectWithValue('Unauthorized Logging Out...');
+      }
+      return thunkAPI.rejectWithValue(error.response.data.msg);
+    }
+  }
+);
+
 const jobSlice = createSlice({
   name: 'job',
   initialState,
@@ -25,10 +45,23 @@ const jobSlice = createSlice({
     },
     clearValues: () => {
       return {
-        ...initialState
+        ...initialState,
       };
-    }
+    },
   },
+  extraReducers: {
+    [createJob.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [createJob.fulfilled]: (state) => {
+      state.isLoading = false;
+      toast.success('Job Created')
+    },
+    [createJob.rejected]: (state, { payload }) => {
+      state.isLoading = true;
+      toast.error(payload)
+    },
+  }
 });
 
 export default jobSlice.reducer;
