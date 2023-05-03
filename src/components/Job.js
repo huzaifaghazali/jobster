@@ -1,9 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import moment from 'moment/moment';
+
 import Wrapper from '../assets/wrappers/Job';
 import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from 'react-icons/fa';
 import JobInfo from './JobInfo';
+
 const Job = ({
   _id,
   company,
@@ -15,7 +18,7 @@ const Job = ({
 }) => {
 
   const dispatch = useDispatch();
-  const date = createdAt;
+  const date = moment(createdAt).format('MMM Do, YYYY');
 
   return (
     <Wrapper>
