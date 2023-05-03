@@ -24,17 +24,17 @@ const initialState = {
 export const getAllJobs = createAsyncThunk(
   'allJobs/getJobs',
   async (_, thunkAPI) => {
-   let url = `/jobs`;
+    let url = `/jobs`;
 
     try {
       const resp = await customFetch.get(url, {
-         headers: {
-            authorization: `Bearer ${thunkAPI.getState().user.user.token}`
-         }
+        headers: {
+          authorization: `Bearer ${thunkAPI.getState().user.user.token}`,
+        },
       });
       return resp.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.data.msg)
+      return thunkAPI.rejectWithValue(error.data.msg);
     }
   }
 );
@@ -43,18 +43,38 @@ const allJobsSlice = createSlice({
   name: 'allJobs',
   initialState,
   extraReducers: {
-   [getAllJobs.pending]: (state) => {
-      state.isLoading = true
-   },
-   [getAllJobs.fulfilled]: (state, { payload }) => {
+    [getAllJobs.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [getAllJobs.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
       state.jobs = payload.jobs;
-   },
-   [getAllJobs.rejected]: (state, { payload }) => {
+    },
+    [getAllJobs.rejected]: (state, { payload }) => {
       state.isLoading = false;
-      toast.error(payload)
-   },
-  }
+      toast.error(payload);
+    },
+  },
 });
 
 export default allJobsSlice.reducer;
+
+/* BUILDER NOTATION
+
+extraReducers: (builder) => {
+    builder
+      .addCase(getAllJobs.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAllJobs.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.jobs = payload.jobs;
+      })
+      .addCase(getAllJobs.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        toast.error(payload);
+      });
+  },
+
+
+*/
