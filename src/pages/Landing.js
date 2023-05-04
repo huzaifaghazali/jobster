@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Wrapper from '../assets/wrappers/LandingPage';
 import { Logo } from '../components';
 
-import main from '../assets/images/Job-Seeker4.svg';
+import main from '../assets/images/job3.svg';
 
 function Landing() {
   return (
