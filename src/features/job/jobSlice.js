@@ -48,7 +48,7 @@ export const deleteJob = createAsyncThunk(
         },
       });
       thunkAPI.dispatch(getAllJobs());
-      return resp.data;
+      return resp.data.msg;
     } catch (error) {
       thunkAPI.dispatch(hideLoading());
       return thunkAPI.rejectWithValue(error.response.data.msg);
@@ -83,6 +83,12 @@ const jobSlice = createSlice({
     },
     [createJob.rejected]: (state, { payload }) => {
       state.isLoading = true;
+      toast.error(payload);
+    },
+    [deleteJob.fulfilled]: (state, { payload }) => {
+      toast.success(payload);
+    },
+    [deleteJob.rejected]: (state, { payload }) => {
       toast.error(payload);
     },
   },
