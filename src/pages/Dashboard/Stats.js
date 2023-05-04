@@ -11,16 +11,18 @@ const Stats = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(showStats())
-  }, [])
+    dispatch(showStats());
+  }, []);
 
-  if(isLoading) {
-    return <Loading center />
+  if (isLoading) {
+    return <Loading center />;
   }
-  return <>
-    <StatsContainer />
-    {monthlyApplications.length > 0 && <ChartsContainer />}
-  </>;
+  return (
+    <>
+      <StatsContainer />
+      {monthlyApplications.length > 0 && <ChartsContainer />}
+    </>
+  );
 };
 
 export default Stats;
