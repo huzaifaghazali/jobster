@@ -5,6 +5,7 @@ import Job from './Job';
 import Loading from './Loading';
 import { getAllJobs } from '../features/allJobs/allJobsSlice';
 import Wrapper from '../assets/wrappers/JobsContainer';
+import PageBtnContainer from './PageBtnContainer';
 
 const JobsContainer = () => {
   const { jobs, isLoading, page, totalJobs, numOfPages } = useSelector((store) => store.allJobs);
@@ -35,6 +36,7 @@ const JobsContainer = () => {
           return <Job key={job._id} {...job} />
         })}
       </div>
+      {numOfPages > 1 && <PageBtnContainer />}
     </Wrapper>
   )
 }
