@@ -52,7 +52,7 @@ const Profile = () => {
             type='text'
             labelText='last name'
             name='lastName'
-            value={userData.name}
+            value={userData.lastName}
             handleChange={handleChange}
           />
 
