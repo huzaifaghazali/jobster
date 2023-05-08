@@ -47,35 +47,36 @@ const allJobsSlice = createSlice({
     },
     clearAllJobsState: () => initialState,
   },
-  extraReducers: {
-    [getAllJobs.pending]: (state) => {
+  extraReducers: (builder) => {
+    builder
+    .addCase(getAllJobs.pending, (state) => {
       state.isLoading = true;
-    },
-    [getAllJobs.fulfilled]: (state, { payload }) => {
+    })
+    .addCase(getAllJobs.fulfilled,  (state, { payload }) => {
       state.isLoading = false;
       state.jobs = payload.jobs;
       state.numOfPages = payload.numOfPages;
       state.totalJobs = payload.totalJobs;
-    },
-    [getAllJobs.rejected]: (state, { payload }) => {
+    })
+    .addCase(getAllJobs.rejected,  (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
-    },
-
-    [showStats.pending]: (state) => {
+    })
+    .addCase(showStats.pending, (state) => {
       state.isLoading = true;
-    },
-    [showStats.fulfilled]: (state, { payload }) => {
+    })
+    .addCase(showStats.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       state.stats = payload.defaultStats;
       state.monthlyApplications = payload.monthlyApplications;
-    },
-    [showStats.rejected]: (state, { payload }) => {
+    })
+    .addCase(showStats.rejected,  (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
-    },
+    })
   },
-});
+
+})
 
 export default allJobsSlice.reducer;
 export const {
@@ -87,22 +88,24 @@ export const {
   clearAllJobsState,
 } = allJobsSlice.actions;
 
-/* BUILDER NOTATION
-
-extraReducers: (builder) => {
-    builder
-      .addCase(getAllJobs.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(getAllJobs.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
-        state.jobs = payload.jobs;
-      })
-      .addCase(getAllJobs.rejected, (state, { payload }) => {
-        state.isLoading = false;
-        toast.error(payload);
-      });
-  },
 
 
-*/
+// extraReducers: (builder) => {
+//     builder
+//       .addCase(getAllJobs.pending, (state) => {
+//         state.isLoading = true;
+//       })
+//       .addCase(getAllJobs.fulfilled, (state, { payload }) => {
+//         state.isLoading = false;
+//         state.jobs = payload.jobs;
+//         state.numOfPages = payload.numOfPages;
+//         state.totalJobs = payload.totalJobs
+//       })
+//       .addCase(getAllJobs.rejected, (state, { payload }) => {
+//         state.isLoading = false;
+//         toast.error(payload);
+//       });
+//   },
+
+
+
