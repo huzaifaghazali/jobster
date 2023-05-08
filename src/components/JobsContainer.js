@@ -8,18 +8,19 @@ import Wrapper from '../assets/wrappers/JobsContainer';
 import PageBtnContainer from './PageBtnContainer';
 
 const JobsContainer = () => {
-  const { jobs, isLoading, page, totalJobs, numOfPages } = useSelector((store) => store.allJobs);
+  const { jobs, isLoading, page, totalJobs, numOfPages, search, searchStatus, searchType, sort } = useSelector((store) => store.allJobs);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getAllJobs())
-  }, [])
+    // eslint-disable-next-line
+  }, [page, search, searchStatus, searchType, sort])
 
-  if(isLoading) {
-      return <Loading center />
+  if (isLoading) {
+    return <Loading center />
   }
 
-  if(jobs.length === 0) {
+  if (jobs.length === 0) {
     return (
       <Wrapper>
         <h2>No jobs to display...</h2>
@@ -27,7 +28,6 @@ const JobsContainer = () => {
     )
   }
 
- 
   return (
     <Wrapper>
       <h5>{totalJobs} job{jobs.length > 1 && 's'} found</h5>
@@ -41,4 +41,4 @@ const JobsContainer = () => {
   )
 }
 
-export default JobsContainer
+export default JobsContainer;
