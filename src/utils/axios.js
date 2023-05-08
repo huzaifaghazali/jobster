@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { getUserFromLocalStorage } from './localStorage';
+import { clearStore } from '../features/user/userSlice';
 
 const customFetch = axios.create({
   baseURL: 'https://jobify-prod.herokuapp.com/api/v1/toolkit',
@@ -18,6 +19,15 @@ return config;
   }
 );
 
+export const checkForUnauthorizedResponse = (error, thunkAPI) => {
+  if(error.response.status === 401) {
+    thunkAPI.dispatch(clearStore());
+    return thunkAPI.rejectedWithValue('Unauthorized! Logging Out...')
+  }
+
+  return thunkAPI.rejectedWithValue(error.response.data.msg);
+
+}
 
 
 export default customFetch;
