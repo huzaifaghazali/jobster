@@ -22,12 +22,9 @@ return config;
 export const checkForUnauthorizedResponse = (error, thunkAPI) => {
   if(error.response.status === 401) {
     thunkAPI.dispatch(clearStore());
-    return thunkAPI.rejectedWithValue('Unauthorized! Logging Out...')
+    return thunkAPI.rejectWithValue('Unauthorized! Logging Out...')
   }
-
-  return thunkAPI.rejectedWithValue(error.response.data.msg);
+  return thunkAPI.rejectWithValue(error.response.data.msg);
 
 }
-
-
 export default customFetch;
