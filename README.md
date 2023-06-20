@@ -1,6 +1,6 @@
 #  JOBSTER - A React.js Redux CRUD App
 
-JOBSTER is a powerful CRUD application built using React.js and Redux. Its primary functionality revolves around displaying, adding, updating, and deleting job records, complemented by insightful data visualization in the form of charts. The app leverages the RESTful API provided by 'https://jobify-prod.herokuapp.com/api/v1/toolkit' to seamlessly perform these CRUD operations.
+JOBSTER is a powerful CRUD application built using React.js and Redux. Its primary functionality revolves around displaying, adding, updating, and deleting job records, complemented by insightful data visualization in the form of charts. The app leverages the RESTful API provided by `https://jobify-prod.herokuapp.com/api/v1/toolkit` to seamlessly perform these CRUD operations.
 
 ## Key Features:
 
@@ -20,9 +20,9 @@ JOBSTER is a powerful CRUD application built using React.js and Redux. Its prima
 
 ## Project Setup:
 
-1. Clone the repository: git clone <repository-url>
-2. Install dependencies: npm install
-3. Start the development server: npm start
+1. Clone the repository: `git clone https://github.com/huzaifaghazali/jobster.git`
+2. Install dependencies: `npm install`
+3. Start the development server: `npm start`
 
 Please ensure that you have the latest version of Node.js and npm installed before proceeding with the above steps.
 
